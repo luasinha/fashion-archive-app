@@ -1,0 +1,48 @@
+.explorar__busca {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 20px 0 12px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+}
+
+.explorar__busca input {
+  flex: 1;
+  padding: 10px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--cor-texto-claro);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.explorar__busca input::placeholder {
+  color: var(--cor-cinza);
+}
+
+.explorar__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.chip {
+  padding: 4px 12px;
+  border: 1px solid var(--cor-primaria);
+  border-radius: 999px;
+  background: var(--cor-branco);
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--cor-texto-padrao);
+  cursor: pointer;
+}
+
+.chip--ativo {
+  background: var(--cor-primaria-clara);
+  font-weight: 600;
+}

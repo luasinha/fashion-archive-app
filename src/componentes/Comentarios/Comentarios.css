@@ -1,0 +1,73 @@
+.comentarios__busca {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 12px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+}
+
+.comentarios__busca input {
+  flex: 1;
+  padding: 9px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--cor-texto-claro);
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.comentarios__busca input::placeholder {
+  color: var(--cor-cinza);
+}
+
+.comentario {
+  margin-bottom: 10px;
+  padding: 12px;
+  border: 1px solid var(--cor-cinza);
+  border-radius: 6px;
+  background: var(--cor-branco);
+}
+
+.comentario__topo {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+}
+
+.comentario__topo span {
+  color: var(--cor-primaria);
+}
+
+.comentario p {
+  white-space: pre-line;
+  word-break: break-word;
+}
+
+.comentario__acoes {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.comentario__acoes button {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  color: var(--cor-primaria);
+  cursor: pointer;
+}
+
+.comentario__acoes .comentario__excluir {
+  color: var(--cor-erro);
+}

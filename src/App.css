@@ -1,0 +1,120 @@
+.tela {
+  padding: 8px 22px 28px;
+}
+
+.titulo-tela {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 2.3rem;
+  font-weight: 400;
+  letter-spacing: 3px;
+}
+
+.subtitulo-tela {
+  margin: 12px 0 26px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.secao-titulo {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 22px 0 10px;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.secao-titulo a,
+.secao-titulo button {
+  background: none;
+  border: none;
+  color: var(--cor-rosa-link);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.link-rosa {
+  color: var(--cor-rosa-link);
+}
+
+.link-botao {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--cor-rosa-link);
+  cursor: pointer;
+}
+
+.mensagem {
+  padding: 24px 0;
+  text-align: center;
+}
+
+.mensagem--erro {
+  color: var(--cor-erro);
+}
+
+.carregando {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+
+.divisor {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 22px 0 14px;
+  font-size: 0.85rem;
+}
+
+.divisor::before,
+.divisor::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--cor-cinza);
+}
+
+.rodape-formulario {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.banner {
+  height: 64px;
+  background: var(--cor-primaria);
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 78px;
+  height: 78px;
+  overflow: hidden;
+  border: 2px solid var(--cor-fundo-padrao);
+  border-radius: 50%;
+  background: var(--cor-cinza);
+  color: var(--cor-primaria);
+  font-size: 2.4rem;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.perfil-cabeca {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: -40px;
+  margin-bottom: 8px;
+}

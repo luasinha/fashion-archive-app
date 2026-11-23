@@ -1,0 +1,32 @@
+.inicio {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 130px 30px 60px;
+  text-align: center;
+}
+
+.inicio__marca h1 {
+  font-size: 3.2rem;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 3px;
+}
+
+.inicio__marca p {
+  margin-top: 12px;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.inicio__acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.inicio__acoes p {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}

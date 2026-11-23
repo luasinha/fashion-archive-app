@@ -1,0 +1,66 @@
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 14px;
+  font-size: 0.9rem;
+}
+
+.campo__caixa {
+  position: relative;
+}
+
+.campo input,
+.campo textarea,
+.campo select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+  font-family: inherit;
+  font-size: 1rem;
+  resize: vertical;
+}
+
+.campo input::placeholder,
+.campo textarea::placeholder {
+  color: var(--cor-cinza);
+}
+
+.campo--senha input {
+  padding-left: 34px;
+  padding-right: 38px;
+}
+
+.campo__icone {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--cor-texto-claro);
+}
+
+.campo__olho {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  background: none;
+  border: none;
+  color: var(--cor-texto-claro);
+  cursor: pointer;
+}
+
+.campo--erro input,
+.campo--erro textarea,
+.campo--erro select {
+  border-color: var(--cor-erro);
+}
+
+.campo__erro {
+  color: var(--cor-erro);
+  font-size: 0.85rem;
+}

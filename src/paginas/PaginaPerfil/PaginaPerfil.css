@@ -1,0 +1,94 @@
+.perfil__nome {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.perfil__usuario {
+  color: var(--cor-primaria);
+  font-size: 0.9rem;
+}
+
+.perfil__bio {
+  margin-top: 6px;
+  word-break: break-word;
+}
+
+.perfil__link {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.9rem;
+  word-break: break-all;
+}
+
+.perfil__edicao {
+  display: flex;
+  gap: 12px;
+}
+
+.perfil__medidas {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--cor-primaria);
+  background: var(--cor-cinza);
+}
+
+.perfil__linha {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.perfil__linha--dupla {
+  grid-template-columns: repeat(2, 1fr);
+  padding: 0 14%;
+}
+
+.perfil__medida {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 4px;
+  background: var(--cor-branco);
+  border: 1px solid var(--cor-primaria);
+  font-size: 0.85rem;
+}
+
+.perfil__medida input {
+  width: 100%;
+  padding: 3px 4px;
+  border: 1px solid var(--cor-primaria);
+  text-align: center;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.perfil__salvos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 10px;
+  border: 1px solid var(--cor-primaria);
+  background: var(--cor-cinza);
+}
+
+.perfil__salvos > * {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 64px;
+  padding: 4px;
+  background: var(--cor-branco);
+  border: 1px solid var(--cor-primaria);
+  text-align: center;
+  font-size: 0.7rem;
+  line-height: 1.1;
+}
+
+.perfil__sair {
+  display: block;
+  margin: 28px auto 0;
+  font-size: 0.9rem;
+}

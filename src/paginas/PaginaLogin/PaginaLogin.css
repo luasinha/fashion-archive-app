@@ -1,0 +1,20 @@
+.login__esqueceu {
+  display: block;
+  margin: -6px 0 14px auto;
+  font-size: 0.8rem;
+}
+
+.login__sociais {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 22px;
+  font-size: 1.3rem;
+}
+
+.login__sociais button {
+  background: none;
+  border: none;
+  color: var(--cor-texto-padrao);
+  cursor: pointer;
+}

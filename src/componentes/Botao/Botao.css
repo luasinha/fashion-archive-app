@@ -1,0 +1,42 @@
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 11px;
+  border: 1px solid var(--cor-texto-padrao);
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 1.1rem;
+  color: var(--cor-texto-padrao);
+  cursor: pointer;
+}
+
+.botao:hover {
+  filter: brightness(0.96);
+}
+
+.botao:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.botao--preenchido {
+  background: var(--cor-primaria-clara);
+}
+
+.botao--contorno {
+  background: var(--cor-branco);
+}
+
+.botao--cinza {
+  background: var(--cor-cinza);
+  border-color: var(--cor-primaria);
+}
+
+.botao--pequeno {
+  width: auto;
+  padding: 3px 14px;
+  font-size: 0.85rem;
+}

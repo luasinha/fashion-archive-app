@@ -1,0 +1,46 @@
+.edicao__banner {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 8px 14px;
+}
+
+.edicao__banner button {
+  background: none;
+  border: none;
+  color: var(--cor-texto-claro);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.edicao__arquivo {
+  display: none;
+}
+
+.edicao__nome {
+  margin-bottom: 16px;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.edicao__link {
+  display: flex;
+  gap: 6px;
+}
+
+.edicao__link span {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  background: var(--cor-primaria);
+  color: var(--cor-texto-claro);
+}
+
+.edicao__acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}

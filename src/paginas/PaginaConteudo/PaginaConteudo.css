@@ -1,0 +1,52 @@
+.conteudo__categoria {
+  color: var(--cor-primaria);
+  font-size: 0.95rem;
+}
+
+.conteudo__titulo {
+  margin: 4px 0 10px;
+  font-size: 2.2rem;
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.conteudo__favorito {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+  padding: 4px 14px;
+  border: 1px solid var(--cor-primaria);
+  border-radius: 999px;
+  background: var(--cor-branco);
+  font-family: inherit;
+  font-size: 0.95rem;
+  color: var(--cor-texto-padrao);
+  cursor: pointer;
+}
+
+.conteudo__resumo {
+  margin-bottom: 8px;
+  font-size: 1.2rem;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+.conteudo__secao {
+  margin-top: 18px;
+}
+
+.conteudo__secao h2 {
+  margin-bottom: 4px;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.conteudo__secao p,
+.conteudo__secao li {
+  line-height: 1.55;
+}
+
+.conteudo__secao ul {
+  padding-left: 20px;
+}
