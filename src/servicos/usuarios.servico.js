@@ -1,29 +1,23 @@
-import { comId, extrairLista, requisicao } from "./api.servico";
 import {
   buscarNoLocalStorage,
   removerDoLocalStorage,
   salvarNoLocalStorage,
 } from "./localstorage.servico";
 
-const RECURSO = "usuarios";
+const CHAVE_USUARIOS = "usuarios";
 const CHAVE_SESSAO = "usuarioLogado";
 
-const listarUsuarios = async () => {
-  const resposta = await requisicao(RECURSO);
-  return extrairLista(resposta).map(comId);
+const listarUsuarios = () => buscarNoLocalStorage(CHAVE_USUARIOS) || [];
+
+export const buscarUsuarioLogado = () => {
+  const id = buscarNoLocalStorage(CHAVE_SESSAO);
+  return listarUsuarios().find((u) => u.id === id) || null;
 };
 
-export const sessaoSalva = () => buscarNoLocalStorage(CHAVE_SESSAO);
-
-export const buscarUsuario = async (id) => {
-  const resposta = await requisicao(RECURSO, `/${id}`);
-  return comId(resposta?.data ?? resposta);
-};
-
-export const cadastrarUsuario = async ({ nomeUsuario, email, senha }) => {
+export const cadastrarUsuario = ({ nomeUsuario, email, senha }) => {
   const emailNormalizado = email.trim().toLowerCase();
   const usuarioNormalizado = nomeUsuario.trim().replace(/^@/, "");
-  const usuarios = await listarUsuarios();
+  const usuarios = listarUsuarios();
 
   if (usuarios.some((u) => u.email === emailNormalizado)) {
     throw new Error("Este e-mail já está cadastrado.");
@@ -32,34 +26,27 @@ export const cadastrarUsuario = async ({ nomeUsuario, email, senha }) => {
     throw new Error("Este nome de usuário já está em uso.");
   }
 
-  await requisicao(RECURSO, "", {
-    method: "POST",
-    body: JSON.stringify({
-      nome: usuarioNormalizado,
-      nomeUsuario: usuarioNormalizado,
-      email: emailNormalizado,
-      senha,
-      bio: "",
-      link: "",
-      foto: "",
-      medidas: { altura: "", peso: "", busto: "", cintura: "", quadril: "" },
-      favoritos: [],
-    }),
-  });
+  const novo = {
+    id: Date.now(),
+    nome: usuarioNormalizado,
+    nomeUsuario: usuarioNormalizado,
+    email: emailNormalizado,
+    senha,
+    bio: "",
+    link: "",
+    foto: "",
+    medidas: { altura: "", peso: "", busto: "", cintura: "", quadril: "" },
+    favoritos: [],
+  };
 
-  const atualizados = await listarUsuarios();
-  const novo = atualizados.find((u) => u.email === emailNormalizado);
-  if (!novo) {
-    throw new Error("Não foi possível concluir o cadastro. Tente novamente.");
-  }
+  salvarNoLocalStorage(CHAVE_USUARIOS, [...usuarios, novo]);
   salvarNoLocalStorage(CHAVE_SESSAO, novo.id);
   return novo;
 };
 
-export const entrarUsuario = async (email, senha) => {
+export const entrarUsuario = (email, senha) => {
   const emailNormalizado = email.trim().toLowerCase();
-  const usuarios = await listarUsuarios();
-  const usuario = usuarios.find(
+  const usuario = listarUsuarios().find(
     (u) => u.email === emailNormalizado && u.senha === senha
   );
   if (!usuario) {
@@ -71,11 +58,7 @@ export const entrarUsuario = async (email, senha) => {
 
 export const sairUsuario = () => removerDoLocalStorage(CHAVE_SESSAO);
 
-export const atualizarUsuario = async (id, usuario) => {
-  const dados = { ...usuario };
-  delete dados.id;
-  await requisicao(RECURSO, `/${id}`, {
-    method: "PUT",
-    body: JSON.stringify(dados),
-  });
+export const atualizarUsuario = (id, usuario) => {
+  const usuarios = listarUsuarios().map((u) => (u.id === id ? usuario : u));
+  salvarNoLocalStorage(CHAVE_USUARIOS, usuarios);
 };

@@ -4,17 +4,13 @@ import { useUsuario } from "../../hooks/useUsuario";
 
 function ValidarAutenticacao() {
   const navigate = useNavigate();
-  const { usuario, carregando } = useUsuario();
+  const { usuario } = useUsuario();
 
   useEffect(() => {
-    if (!carregando && !usuario) {
+    if (!usuario) {
       navigate("/login");
     }
-  }, [carregando, usuario, navigate]);
-
-  if (carregando) {
-    return <main className="carregando">Carregando...</main>;
-  }
+  }, [usuario, navigate]);
 
   return usuario ? <Outlet /> : null;
 }

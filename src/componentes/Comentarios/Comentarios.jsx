@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FiEdit2, FiSearch, FiTrash2 } from "react-icons/fi";
 import { toast } from "react-toastify";
 import Botao from "../Botao/Botao";
@@ -14,65 +14,30 @@ import "./Comentarios.css";
 
 function Comentarios({ slug }) {
   const { usuario } = useUsuario();
-  const [comentarios, setComentarios] = useState([]);
-  const [carregando, setCarregando] = useState(true);
-  const [erroLista, setErroLista] = useState("");
-  const [versao, setVersao] = useState(0);
+  const [comentarios, setComentarios] = useState(listarComentarios);
   const [busca, setBusca] = useState("");
   const [texto, setTexto] = useState("");
   const [erroTexto, setErroTexto] = useState("");
-  const [enviando, setEnviando] = useState(false);
   const [editandoId, setEditandoId] = useState(null);
   const [textoEdicao, setTextoEdicao] = useState("");
   const [erroEdicao, setErroEdicao] = useState("");
 
-  useEffect(() => {
-    let ativo = true;
-    listarComentarios()
-      .then((lista) => {
-        if (!ativo) return;
-        setComentarios(lista);
-        setErroLista("");
-      })
-      .catch((erro) => {
-        if (!ativo) return;
-        setErroLista(erro.message);
-        toast.error(erro.message);
-      })
-      .finally(() => ativo && setCarregando(false));
-    return () => {
-      ativo = false;
-    };
-  }, [versao]);
-
-  function recarregar() {
-    setCarregando(true);
-    setVersao((v) => v + 1);
-  }
-
-  async function publicar(evento) {
+  function publicar(evento) {
     evento.preventDefault();
     const erro = validarComentario(texto);
     setErroTexto(erro);
     if (erro) return;
 
-    setEnviando(true);
-    try {
-      await salvarComentario({
-        conteudo: slug,
-        autorId: usuario.id,
-        autor: usuario.nomeUsuario,
-        texto: texto.trim(),
-        criadoEm: new Date().toISOString(),
-      });
-      toast.success("Comentário publicado com sucesso.");
-      setTexto("");
-      recarregar();
-    } catch (erroApi) {
-      toast.error(erroApi.message);
-    } finally {
-      setEnviando(false);
-    }
+    salvarComentario({
+      conteudo: slug,
+      autorId: usuario.id,
+      autor: usuario.nomeUsuario,
+      texto: texto.trim(),
+      criadoEm: new Date().toISOString(),
+    });
+    toast.success("Comentário publicado com sucesso.");
+    setTexto("");
+    setComentarios(listarComentarios());
   }
 
   function iniciarEdicao(comentario) {
@@ -81,30 +46,22 @@ function Comentarios({ slug }) {
     setErroEdicao("");
   }
 
-  async function salvarEdicao(comentario) {
+  function salvarEdicao(comentario) {
     const erro = validarComentario(textoEdicao);
     setErroEdicao(erro);
     if (erro) return;
 
-    try {
-      await salvarComentario({ ...comentario, texto: textoEdicao.trim(), editado: true });
-      toast.success("Comentário atualizado com sucesso.");
-      setEditandoId(null);
-      recarregar();
-    } catch (erroApi) {
-      toast.error(erroApi.message);
-    }
+    salvarComentario({ ...comentario, texto: textoEdicao.trim(), editado: true });
+    toast.success("Comentário atualizado com sucesso.");
+    setEditandoId(null);
+    setComentarios(listarComentarios());
   }
 
-  async function excluir(comentario) {
+  function excluir(comentario) {
     if (!window.confirm("Deseja realmente excluir este comentário?")) return;
-    try {
-      await excluirComentario(comentario.id);
-      toast.success("Comentário excluído com sucesso.");
-      recarregar();
-    } catch (erroApi) {
-      toast.error(erroApi.message);
-    }
+    excluirComentario(comentario.id);
+    toast.success("Comentário excluído com sucesso.");
+    setComentarios(listarComentarios());
   }
 
   const termo = busca.toLowerCase();
@@ -129,9 +86,7 @@ function Comentarios({ slug }) {
           onChange={(e) => setTexto(e.target.value)}
           erro={erroTexto}
         />
-        <Botao type="submit" disabled={enviando}>
-          {enviando ? "Publicando..." : "Comentar"}
-        </Botao>
+        <Botao type="submit">Comentar</Botao>
       </form>
 
       {doConteudo.length > 0 && (
@@ -147,28 +102,15 @@ function Comentarios({ slug }) {
         </label>
       )}
 
-      {carregando && <p className="mensagem">Carregando comentários...</p>}
-
-      {!carregando && erroLista && (
-        <div className="mensagem mensagem--erro">
-          <p>{erroLista}</p>
-          <button type="button" className="link-botao" onClick={recarregar}>
-            Tentar novamente
-          </button>
-        </div>
-      )}
-
-      {!carregando && !erroLista && doConteudo.length === 0 && (
+      {doConteudo.length === 0 && (
         <p className="mensagem">Ainda não há comentários. Seja a primeira pessoa a comentar!</p>
       )}
 
-      {!carregando && !erroLista && doConteudo.length > 0 && filtrados.length === 0 && (
+      {doConteudo.length > 0 && filtrados.length === 0 && (
         <p className="mensagem">Nenhum comentário encontrado.</p>
       )}
 
-      {!carregando &&
-        !erroLista &&
-        filtrados.map((c) => (
+      {filtrados.map((c) => (
           <article key={c.id} className="comentario">
             <div className="comentario__topo">
               <strong>@{c.autor}</strong>

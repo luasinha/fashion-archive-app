@@ -1,25 +1,23 @@
-import { comId, extrairLista, requisicao } from "./api.servico";
+import { buscarNoLocalStorage, salvarNoLocalStorage } from "./localstorage.servico";
 
-const RECURSO = "comentarios";
+const CHAVE = "comentarios";
 
-export const listarComentarios = async () => {
-  const resposta = await requisicao(RECURSO);
-  return extrairLista(resposta).map(comId);
-};
+export const listarComentarios = () => buscarNoLocalStorage(CHAVE) || [];
 
-export const salvarComentario = async (comentario) => {
-  const { id, ...dados } = comentario;
-  if (id) {
-    return requisicao(RECURSO, `/${id}`, {
-      method: "PUT",
-      body: JSON.stringify(dados),
-    });
+export const salvarComentario = (comentario) => {
+  const comentarios = listarComentarios();
+  if (!comentario.id) {
+    comentarios.push({ ...comentario, id: Date.now() });
+  } else {
+    const indice = comentarios.findIndex((c) => c.id === comentario.id);
+    comentarios[indice] = comentario;
   }
-  return requisicao(RECURSO, "", {
-    method: "POST",
-    body: JSON.stringify(dados),
-  });
+  salvarNoLocalStorage(CHAVE, comentarios);
 };
 
-export const excluirComentario = (id) =>
-  requisicao(RECURSO, `/${id}`, { method: "DELETE" });
+export const excluirComentario = (id) => {
+  salvarNoLocalStorage(
+    CHAVE,
+    listarComentarios().filter((c) => c.id !== id)
+  );
+};

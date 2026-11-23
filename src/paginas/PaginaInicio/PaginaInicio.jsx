@@ -5,9 +5,9 @@ import "./PaginaInicio.css";
 
 function PaginaInicio() {
   const navigate = useNavigate();
-  const { usuario, carregando } = useUsuario();
+  const { usuario } = useUsuario();
 
-  if (!carregando && usuario) {
+  if (usuario) {
     return <Navigate to="/home" replace />;
   }
 

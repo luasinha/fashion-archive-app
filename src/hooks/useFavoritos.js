@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import { useUsuario } from "./useUsuario";
 
 export function useFavoritos() {
@@ -7,15 +6,11 @@ export function useFavoritos() {
 
   const ehFavorito = (slug) => favoritos.includes(slug);
 
-  async function alternar(slug) {
+  function alternar(slug) {
     const novos = ehFavorito(slug)
       ? favoritos.filter((s) => s !== slug)
       : [...favoritos, slug];
-    try {
-      await atualizar({ favoritos: novos });
-    } catch (erro) {
-      toast.error(erro.message);
-    }
+    atualizar({ favoritos: novos });
   }
 
   return { favoritos, ehFavorito, alternar };
