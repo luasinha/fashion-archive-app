@@ -11,7 +11,7 @@ export default defineConfig({
       manifest: {
         name: 'Fashion Archive',
         short_name: 'Fashion Archive',
-        description: 'Seu arquivo de moda: peças, tecidos, modelagens, corpo e história da moda.',
+        description: 'Seu arquivo pessoal de moda!',
         theme_color: '#f9f6f1',
         background_color: '#f9f6f1',
         display: 'standalone',
